@@ -1979,7 +1979,11 @@ CGImageRef YYCGImageCreateWithWebPData(CFDataRef webpData,
                 CFDictionaryRef gif = CFDictionaryGetValue(properties, kCGImagePropertyGIFDictionary);
                 if (gif) {
                     CFTypeRef loop = CFDictionaryGetValue(gif, kCGImagePropertyGIFLoopCount);
-                    if (loop) CFNumberGetValue(loop, kCFNumberNSIntegerType, &_loopCount);
+                    if (loop) {
+                        CFNumberGetValue(loop, kCFNumberNSIntegerType, &_loopCount);
+                    } else {
+                        _loopCount = 1;
+                    }
                 }
                 CFRelease(properties);
             }
